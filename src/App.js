@@ -1,6 +1,87 @@
+import {useState} from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
+
 import Home from './Component/Home'
+import Login from './Component/Login'
+import Cart from './Component/Cart'
+import NotFound from './Component/NotFound'
+
+import ProtectedRoute from './Component/ProtectedRoute'
+import CartContext from './context/CartContext'
+
 import './App.css'
 
-const App = () => <Home />
+const App = () => {
+  const [cartList, setCartList] = useState([])
+  const [restaurantName, setRestaurantName] = useState('')
+
+  const addCartItem = dish => {
+    const isAlreadyExists = cartList.find(item => item.dishId === dish.dishId)
+
+    if (!isAlreadyExists) {
+      setCartList(prev => [...prev, dish])
+    } else {
+      setCartList(prev =>
+        prev.map(item =>
+          item.dishId === dish.dishId
+            ? {...item, quantity: item.quantity + dish.quantity}
+            : item,
+        ),
+      )
+    }
+  }
+  const removeCartItem = dishId => {
+    setCartList(prev => prev.filter(item => item.dishId !== dishId))
+  }
+
+  const incrementCartItemQuantity = dishId => {
+    setCartList(prev =>
+      prev.map(item =>
+        item.dishId === dishId ? {...item, quantity: item.quantity + 1} : item,
+      ),
+    )
+  }
+
+  const decrementCartItemQuantity = dishId => {
+    setCartList(prev =>
+      prev
+        .map(item =>
+          item.dishId === dishId
+            ? {...item, quantity: item.quantity - 1}
+            : item,
+        )
+        .filter(item => item.quantity > 0),
+    )
+  }
+  return (
+    <CartContext.Provider
+      value={{
+        cartList,
+        addCartItem,
+        removeCartItem,
+        incrementCartItemQuantity,
+        decrementCartItemQuantity,
+
+        restaurantName,
+        setRestaurantName,
+      }}
+    >
+      <Router>
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          <ProtectedRoute exact path="/" component={Home} />
+          <ProtectedRoute exact path="/cart" component={Cart} />
+          <Route exact path="/not-found" component={NotFound} />
+          <Redirect to="/not-found" />
+        </Switch>
+      </Router>
+    </CartContext.Provider>
+  )
+}
 
 export default App
