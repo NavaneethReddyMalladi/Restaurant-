@@ -20,20 +20,20 @@ const DishItem = ({dishDetails}) => {
   const [quantity, setQuantity] = useState(0)
   const {addCartItem} = useContext(CartContext)
 
-  const onIncrementQuantity = () => setQuantity(prevState => prevState + 1)
+  const onIncreaseQuantity = () => setQuantity(prevState => prevState + 1)
 
-  const onDecrementQuantity = () =>
+  const onDecreaseQuantity = () =>
     setQuantity(prevState => (prevState > 0 ? prevState - 1 : 0))
 
   const onAddItemToCart = () => addCartItem({...dishDetails, quantity})
 
   const renderControllerButton = () => (
     <div className="controller-container d-flex align-items-center bg-success">
-      <button className="button" type="button" onClick={onDecrementQuantity}>
+      <button className="button" type="button" onClick={onDecreaseQuantity}>
         -
       </button>
-      <p className="quantity">{quantity()}</p>
-      <button className="button" type="button" onClick={onIncrementQuantity}>
+      <p className="quantity">{quantity}</p>
+      <button className="button" type="button" onClick={onIncreaseQuantity}>
         +
       </button>
     </div>
@@ -44,7 +44,7 @@ const DishItem = ({dishDetails}) => {
       <div
         className={`veg-border ${dishType === 1 ? 'non-veg-border' : ''} me-3`}
       >
-        <div className={`veg-round ${dishType === 1 ? 'non-ved-round' : ''}`} />
+        <div className={`veg-round ${dishType === 1 ? 'non-ve-round' : ''}`} />
       </div>
       <div className="dish-details-container">
         <h1 className="dish-name">{dishName}</h1>
@@ -58,7 +58,7 @@ const DishItem = ({dishDetails}) => {
         )}
         {addonCat.length !== 0 && (
           <p className="addon-availability-text mb-0">
-            Customization available
+            Customizations available
           </p>
         )}
         {quantity > 0 && (

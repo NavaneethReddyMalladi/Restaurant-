@@ -10,7 +10,7 @@ import './index.css'
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [response, setResponse] = useState([])
-  const [activeCategotyId, setActiveCategoryId] = useState('')
+  const [activeCategoryId, setActiveCategoryId] = useState('')
 
   const {cartList, setRestaurantName} = useContext(CartContext)
 
@@ -35,7 +35,8 @@ const Home = () => {
 
   const fetchRestaurantApi = async () => {
     // const api = 'https://run.mocky.io/v3/72562bef-1d10-4cf5-bd26-8b0c53460a8e'
-    const api = 'https://run.mocky.io/v3/a67edc87-49c7-4822-9cb4-e2ef94cb3099'
+    const api = 'https://run.mocky.io/v3/2477b10c-ee18-4487-9962-1b3d073432c4'
+    // const api='https://run.mocky.io/v3/a6edc87-49c7-4822-9cb4-e2ef94cb3099'
     const apiResponse = await fetch(api)
     const data = await apiResponse.json()
     console.log(data)
@@ -66,7 +67,7 @@ const Home = () => {
       return (
         <li
           className={`each-tab-item ${
-            eachCategory.menuCategoryId === activeCategotyId
+            eachCategory.menuCategoryId === activeCategoryId
               ? 'active-tab-item'
               : ''
           }`}
@@ -85,7 +86,7 @@ const Home = () => {
 
   const renderDishes = () => {
     const {categoryDishes} = response.find(
-      eachCategory => eachCategory.menuCategoryId === activeCategotyId,
+      eachCategory => eachCategory.menuCategoryId === activeCategoryId,
     )
 
     return (

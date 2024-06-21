@@ -67,14 +67,14 @@
   border: none;
   outline: none;
   cursor: pointer;
-  color: #fff;
+  color: #000;
   font-weight: 600;
   font-size: 18px;
 }
 
 .quantity {
   margin: 0 10px;
-  color: #fff;
+  color: #000;
   font-size: 18px;
 }
 

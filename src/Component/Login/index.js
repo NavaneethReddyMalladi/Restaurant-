@@ -64,7 +64,7 @@ const Login = props => {
         />
         <label htmlFor="setPassword">PASSWORD</label>
         <input
-          id="password"
+          id="setPassword"
           type="password"
           onChange={onChangeHandler}
           value={password}

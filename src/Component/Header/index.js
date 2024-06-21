@@ -15,6 +15,10 @@ const Header = props => {
     Cookies.remove('jwt_token')
     history.replace('/login')
   }
+  const onCLickHome = () => {
+    const {history} = props
+    history.replace('/')
+  }
 
   const renderCartIcon = () => (
     <div className="cart-icon-link">
@@ -31,7 +35,9 @@ const Header = props => {
 
   return (
     <header className="p-4 d-flex flex-row align-items-center nav-header">
-      <h1 className="m-0 logo-heading">{restaurantName}</h1>
+      <button onClick={onCLickHome} className="m-0 logo-heading">
+        {restaurantName}
+      </button>
       <div className="d-flex flex-row align-items-center ms-auto">
         <p className="mt-0 mb-0 me-o d-none d-sm-block my-orders-text">
           My Orders

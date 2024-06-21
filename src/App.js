@@ -39,6 +39,7 @@ const App = () => {
     setCartList(prev => prev.filter(item => item.dishId !== dishId))
   }
 
+  const removeAllCartItems = () => setCartList([])
   const incrementCartItemQuantity = dishId => {
     setCartList(prev =>
       prev.map(item =>
@@ -66,7 +67,7 @@ const App = () => {
         removeCartItem,
         incrementCartItemQuantity,
         decrementCartItemQuantity,
-
+        removeAllCartItems,
         restaurantName,
         setRestaurantName,
       }}

@@ -17,7 +17,7 @@ const Cart = () => {
         alt="empty view"
         className="empty-view-image"
       />
-      <p className="empty-description">Your cart is empty</p>
+      <p className="empty-description">Your cart is Empty.</p>
     </div>
   )
 
@@ -35,7 +35,7 @@ const Cart = () => {
       </div>
       <ul className="ps-0 d-flex flex-column align-items-center">
         {cartList.map(dish => (
-          <CartItem key={dish.id} cartItemDetails={dish} />
+          <CartItem key={dish.dishId} cartItemDetails={dish} />
         ))}
       </ul>
     </>
@@ -45,7 +45,7 @@ const Cart = () => {
     <div className="cart-page-container d-flex flex-column">
       <Header />
       <div className="cart-body-container d-flex flex-column">
-        {cartList.lengt === 0 ? renderEmptyView() : renderCartItems()}
+        {cartList.length === 0 ? renderEmptyView() : renderCartItems()}
       </div>
     </div>
   )
